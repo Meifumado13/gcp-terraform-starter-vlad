@@ -29,3 +29,16 @@ resource "google_compute_firewall" "vlad_allow_ssh" {
 
   target_tags = ["ssh-access"]
 }
+resource "google_compute_firewall" "vlad_allow_http" {
+  name    = "vlad-allow-http"
+  network = google_compute_network.vpc_network.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+
+  target_tags = ["http-server"]
+}
